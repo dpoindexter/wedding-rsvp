@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SeedModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="SeedModelStoreContainer">
+          <EntitySet Name="RSVP" EntityType="SeedModel.Store.RSVP" store:Type="Tables" Schema="dbo" />
+        </EntityContainer>
+        <EntityType Name="RSVP">
+          <Key>
+            <PropertyRef Name="Ix" />
+          </Key>
+          <Property Name="Ix" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Guest1Name" Type="nvarchar" MaxLength="255" />
+          <Property Name="Guest1Editable" Type="bit" />
+          <Property Name="Guest2Name" Type="nvarchar" MaxLength="255" />
+          <Property Name="Guest2Editable" Type="bit" />
+          <Property Name="AllowedPlusOne" Type="bit" />
+          <Property Name="GuestPrefilled" Type="bit" />
+        </EntityType>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SeedModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="RsvpEntities" annotation:LazyLoadingEnabled="true" >
+          <EntitySet Name="RSVPs" EntityType="SeedModel.RSVP" />
+        </EntityContainer>
+        <EntityType Name="RSVP">
+          <Key>
+            <PropertyRef Name="Ix" />
+          </Key>
+          <Property Type="Int32" Name="Ix" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Guest1Name" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="Guest1Editable" />
+          <Property Type="String" Name="Guest2Name" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="Guest2Editable" />
+          <Property Type="Boolean" Name="AllowedPlusOne" />
+          <Property Type="Boolean" Name="GuestPrefilled" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SeedModelStoreContainer" CdmEntityContainer="RsvpEntities" >
+          <EntitySetMapping Name="RSVPs">
+            <EntityTypeMapping TypeName="SeedModel.RSVP">
+              <MappingFragment StoreEntitySet="RSVP">
+                <ScalarProperty Name="GuestPrefilled" ColumnName="GuestPrefilled" />
+                <ScalarProperty Name="AllowedPlusOne" ColumnName="AllowedPlusOne" />
+                <ScalarProperty Name="Guest2Editable" ColumnName="Guest2Editable" />
+                <ScalarProperty Name="Guest2Name" ColumnName="Guest2Name" />
+                <ScalarProperty Name="Guest1Editable" ColumnName="Guest1Editable" />
+                <ScalarProperty Name="Guest1Name" ColumnName="Guest1Name" />
+                <ScalarProperty Name="Ix" ColumnName="Ix" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="RsvpSeed" >
+        <EntityTypeShape EntityType="SeedModel.RSVP" Width="1.5" PointX="0.75" PointY="0.75" Height="2.3648893229166665" />
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,45 @@
+﻿@model PostmarkDotNet.PostmarkMessage
+
+@{
+    ViewBag.Title = "Contact Us";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Referrer = (!String.IsNullOrEmpty(ViewBag.Referrer)) ? ViewBag.Referrer : Url.Action("Home");
+}
+
+<h1>Contact us</h1>
+
+@using (Html.BeginForm()) {
+    
+    <fieldset id="search">
+        <div id="record">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ReplyTo, "From")
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.ReplyTo)
+                @Html.ValidationMessageFor(model => model.ReplyTo)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Subject)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Subject)
+                @Html.ValidationMessageFor(model => model.Subject)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.TextBody, "Message")
+            </div>
+            <div class="editor-field">
+                @Html.TextAreaFor(model => model.TextBody)
+                @Html.ValidationMessageFor(model => model.TextBody)
+            </div>
+
+            <div id="buttons">
+                <input type="submit" value="Send" /> or <a class="button" href="@ViewBag.Referrer">Cancel</a>
+            </div>
+        </div>
+    </fieldset>
+}
+

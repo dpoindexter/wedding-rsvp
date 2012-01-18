@@ -1,0 +1,43 @@
+﻿@model MarjoAndDaniel.Models.RsvpViewModel
+
+@{
+    ViewBag.Title = "Add";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Add to RSVP List</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <h3>Guest 1</h3>
+    @Html.EditorFor(model => model.Primary, "Guest")
+
+    <h3>Guest 2/Plus One</h3>
+    @Html.EditorFor(model => model.PlusOne, "Guest")
+
+    <h3>Other Settings</h3>
+    <table class="editor">
+        <tr>
+            <td class="editor-label">
+                Allowed a plus-one?
+            </td>
+            <td class="editor-field">
+                @Html.EditorFor(model => model.IsAllowedPlusOne)
+            </td>
+        </tr>
+        <tr>
+            <td class="editor-label">
+                Plus-one information prefilled?
+            </td>
+            <td class="editor-field">
+                @Html.EditorFor(model => model.IsGuestPrefilled)
+            </td>
+        </tr>
+    </table>
+
+        <p>
+            <input type="submit" value="Create" /> @Html.ActionLink("Back to List", "Index")
+        </p>
+}
+

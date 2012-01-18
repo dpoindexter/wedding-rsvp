@@ -1,0 +1,44 @@
+﻿@model IEnumerable<MarjoAndDaniel.Models.Rsvp>
+
+@{
+    ViewBag.Title = "NoResponse";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var Primaries = Model.Count();
+    var PlusOnes = Model.Count(m => m.IsAllowedPlusOne && m.IsGuestPrefilled);
+}
+
+<h2>Haven't Responded</h2>
+
+
+<table class="admin">
+    <thead>
+        <tr>
+            <th>Guest One</th>
+            <th>Guest Two</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var rsvp in Model) {
+        <tr>
+            <td>
+                @rsvp.Primary.Name
+            </td>
+            <td>
+                @rsvp.PlusOne.Name
+            </td>
+            <td></td>
+        </tr>
+    }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td>@Primaries</td>
+            <td>@PlusOnes</td>
+            <td>@(Primaries + PlusOnes)</td>
+        </tr>
+    </tfoot>
+</table>
+
+
+

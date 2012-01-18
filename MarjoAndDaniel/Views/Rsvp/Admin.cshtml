@@ -1,0 +1,53 @@
+﻿@model IEnumerable<MarjoAndDaniel.Models.Rsvp>
+@using MarjoAndDaniel.Models;
+
+@{
+    ViewBag.Title = "Admin";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var Primaries = Model.Sum(i => (i.Primary.IsAttending.GetValueOrDefault()) ? 1 : 0);
+    var PlusOnes = Model.Sum(i => (i.PlusOne.IsAttending.GetValueOrDefault()) ? 1 : 0);
+    var Declines = Model.Sum(
+        i => ((!i.Primary.IsAttending ?? false) ? 1 : 0) + ((i.PlusOneCss() == "decline") ? 1 : 0)
+    );
+}
+
+<h2>Responses</h2>
+
+
+<table class="admin">
+    <thead>
+        <tr>
+            <th>Responded</th>
+            <th>Guest One</th>
+            <th>Guest Two</th>
+            <th>Message</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var rsvp in Model) {
+        <tr>
+            <td>
+                @((rsvp.RespondedOn != null) ? rsvp.RespondedOn.Value.ToString("MMM d, h:mm tt") : "")
+            </td>
+            <td class="@((rsvp.Primary.IsAttending ?? false) ? "accept" : "decline")">
+                @rsvp.Primary.Name
+            </td>
+            <td class="@rsvp.PlusOneCss()">
+                @rsvp.PlusOne.Name
+            </td>
+            <td>
+                @rsvp.Message
+            </td>
+        </tr>
+    }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td></td>
+            <td>@Primaries</td>
+            <td>@PlusOnes</td>
+            <td>@(Primaries + PlusOnes) <span class="decline-count">(@Declines)</span></td>
+        </tr>
+    </tfoot>
+</table>
+

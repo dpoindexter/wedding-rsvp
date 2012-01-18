@@ -1,0 +1,34 @@
+﻿@model MarjoAndDaniel.Models.GuestViewModel
+
+<table class="editor">
+
+    <tr>
+        <td class="editor-label">
+            Name
+        </td>
+        <td class="editor-field">
+            @Html.EditorFor(model => model.Name)
+        </td>
+    </tr>
+
+    <tr>
+        <td class="editor-label">
+            Is this person attending?
+        </td>
+        <td class="editor-field">
+            @Html.RadioButtonFor(model => model.IsAttending, "Yes")<label>Yes</label>
+            @Html.RadioButtonFor(model => model.IsAttending, "No")<label>No</label>
+        </td>
+    </tr>
+
+    <tr>
+        <td class="editor-label">
+            Allow name edits?
+        </td>        
+        <td class="editor-field">
+            @Html.EditorFor(model => model.IsEditable)
+        </td>
+    </tr>
+
+</table>
+

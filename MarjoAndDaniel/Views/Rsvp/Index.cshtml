@@ -1,0 +1,95 @@
+﻿@model MarjoAndDaniel.Models.RsvpViewModel
+@using System.Web.Script.Serialization
+           
+@{
+    ViewBag.Title = "RSVP Now";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section scripts {
+
+    <script type="text/javascript" src="@Url.Content("~/Scripts/knockout-1.1.2.debug.js")"></script>
+
+    <script type="text/javascript">
+        
+        //This is for passing in a set of initial values, e.g. linking directly to a response instead of searching for it
+        window.data = null;
+        window.dataUrl = "@Url.Action("Search")";
+    
+    </script>
+
+    <script type="text/javascript" src="@Url.Content("~/Scripts/rsvp.js")"></script>
+
+}
+
+<h1>RSVP</h1>
+<p>Enter your name in the search box below. Your nickname probably won't work &ndash; try your last name. Select your name from the list, and fill out the form that will appear below.</p>
+<p><em>Hint: try entering "David"</em></p>
+@using (Html.BeginForm()) {
+
+    <fieldset id="search">
+        
+        <input type="text" name="searchbox" id="searchbox" placeholder="Find your name"/>
+
+        <div id="record" data-bind="visible: isRecordSelected()">
+
+            <input type="hidden" id="Id" name="Id" data-bind="value: Id"/>
+
+            <fieldset id="primary" class="guest">
+                <h2>Guest One</h2>
+
+                <input type="text" name="Primary.Name" id="Primary_Name" data-bind="value: Primary.Name, readonly: !Primary.IsEditable()" />
+
+                <fieldset class="radio">
+                    <input type="radio" name="Primary.IsAttending" id="Primary_IsAttending_Yes" value="Accept" data-bind="checked: Primary.IsAttending" /><label for="Primary_IsAttending_Yes">Yes, I'll be there.</label>
+                    <input type="radio" name="Primary.IsAttending" id="Primary_IsAttending_No" value="Decline" data-bind="checked: Primary.IsAttending" /><label for="Primary_IsAttending_No">No, I won't be able to make it.</label>
+                </fieldset>
+                        
+            </fieldset>
+
+            <div id="add-guest" data-bind="visible: Primary.IsAttending() === 'Accept' && IsAllowedPlusOne() && !IsGuestPrefilled()">
+                <fieldset class="radio">
+                    <input type="radio" name="bringingGuest" id="bringingGuestYes" value="Yes" data-bind="checked: bringingGuest" /><label for="bringingGuestYes">I'm attending with a guest</label>
+                    <input type="radio" name="bringingGuest" id="bringingGuestNo" value="No" data-bind="checked: bringingGuest" /><label for="bringingGuestNo">I'm attending by myself</label>
+                </fieldset>
+            </div>
+
+            <fieldset id="plusone" class="guest" data-bind="visible: IsGuestPrefilled() || bringingGuest() == 'Yes'">
+
+                <h2>Guest Two</h2>
+
+                <div data-bind="visible: bringingGuest() == 'Yes' || IsGuestPrefilled()">
+                    <input type="text" name="PlusOne.Name" id="PlusOne_Name" data-bind="value: PlusOne.Name" />
+                </div>
+
+                <fieldset class="radio" data-bind="visible: IsGuestPrefilled()">
+                    <input type="radio" name="PlusOne.IsAttending" id="PlusOne_IsAttending_Yes" value="Accept" data-bind="checked: PlusOne.IsAttending" /><label for="PlusOne_IsAttending_Yes">Yes, I'll be there.</label>
+                    <input type="radio" name="PlusOne.IsAttending" id="PlusOne_IsAttending_No" value="Decline" data-bind="checked: PlusOne.IsAttending" /><label for="PlusOne_IsAttending_No">No, I won't be able to make it.</label>
+                </fieldset>    
+                      
+            </fieldset>
+
+            <fieldset id="message">
+                <textarea name="Message" id="Message" data-bind="value: Message"></textarea>
+                <label><em>Message for us</em></label>
+            </fieldset>
+
+            <div id="buttons">
+                <input type="submit" value="Send your response" /> or 
+                <a class="button" data-bind="click: startOver">Start over</a>
+            </div>
+
+        </div>
+
+    </fieldset>
+
+
+    
+    <h2>Having trouble?</h2>
+    
+    <p>@Html.ActionLink("Email us directly", "Contact", "Home"), and we'll make sure to record your response. We're sorry for the trouble.</p>
+
+}
+
+
+

@@ -1,0 +1,12 @@
+﻿@{
+    ViewBag.Title = "Welcome!";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Welcome!</h1>
+
+<p>Hello, friends and family. Welcome to Marjo and Daniel's wedding website. We hope you'll find all the information you need about our wedding.</p>
+
+<p>Read about @Html.ActionLink("how we met", "HowWeMet", "Story"), or our @Html.ActionLink("proposal story", "Engagement", "Story"). Find information @Html.ActionLink("about the wedding", "Index", "Wedding"), and links to our @Html.ActionLink("wedding registry", "Registry", "Wedding"). @Html.ActionLink("RSVP", "Index", "Rsvp") and @Html.ActionLink("get directions", "Directions", "Wedding"). And if you still have questions, @Html.ActionLink("send us an email", "Contact", "Home").</p>
+
+<p>We're incredibly excited to share our wedding with you. We can't wait to see you on May 7th.</p>

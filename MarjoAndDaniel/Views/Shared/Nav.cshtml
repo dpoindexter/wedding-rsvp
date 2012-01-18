@@ -1,0 +1,21 @@
+﻿<a href="@Url.Action("Index", "Story")" id="nav-story" class="nav ddtrigger">
+    Our Story
+</a>
+<div id="dd-story" class="ddlist">
+    @Html.ActionLink("How we met", "HowWeMet", "Story", null, new { @class = "first" })
+    @Html.ActionLink("Engagement story", "Engagement", "Story")
+    @Html.ActionLink("Pictures", "Pictures", "Story", null, new { @class = "last" })
+</div>
+
+<a href="@Url.Action("Index", "Wedding")" id="nav-wedding" class="nav ddtrigger">
+    Wedding Details
+</a>
+<div id="dd-wedding" class="ddlist">
+    @Html.ActionLink("Time & location", "Venue", "Wedding", null, new { @class = "first" })
+    @Html.ActionLink("Get directions", "Directions", "Wedding")
+    @Html.ActionLink("Accomodations", "Hotel", "Wedding")
+    @Html.ActionLink("Registry information", "Registry", "Wedding")
+    @Html.ActionLink("Wedding party", "WeddingParty", "Wedding", null, new { @class = "last" })
+</div>
+
+@Html.ActionLink("RSVP", "Index", "RSVP", null, new { @id = "nav-rsvp", @class = "nav" })
